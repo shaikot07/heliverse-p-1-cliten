@@ -42,27 +42,4 @@ body {
     } */
   
   /**** Common style ****/
-    .my-container{
-        @apply max-w-[1240px] mx-auto px-3
-    }
-    .my-title{
-        @apply font-bold text-2xl lg:text-4xl
-    }
-    .my-subtitle{
-        @apply font-semibold text-xl lg:text-2xl
-    }
-  
-    .my-inp{
-      @apply w-full p-3 rounded bg-slate-900 text-slate-100
-    }
-    .my-inp:focus{
-      @apply shadow-inner shadow-slate-400 outline-none
-    }
-  
-    .my-btn-one{
-      @apply rounded inline-block bg-emerald-500 px-3 py-2 hover:animate-pulse font-semibold text-slate-50
-    }
-    .my-btn-one-outline{
-      @apply rounded inline-block border-2 border-emerald-500 text-emerald-500 bg-white hover:bg-emerald-500 hover:text-white transition px-3 py-2 hover:animate-pulse font-semibold
-    }
   

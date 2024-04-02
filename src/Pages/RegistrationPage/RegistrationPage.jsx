@@ -61,14 +61,12 @@ const RegistrationPage = () => {
                 photo_url,
                 email,
                 password
-
-
             };
             console.log(user);
             createUser(email, password)
                 .then((res) => {
                     setSuccess("Registration successful");
-                    // axiosPublic.post('/users', user);
+                    axiosPublic.post('/users', user);
                     setLoading(false);
                     updatedUserProfile(user?.name, user?.photo_url)
                         .then((res) => {
