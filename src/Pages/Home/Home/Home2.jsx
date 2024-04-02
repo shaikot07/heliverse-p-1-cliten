@@ -2,12 +2,12 @@
 import { useEffect, useState } from 'react';
 import useAxiosPublic from '../../../Hooks/useAxiosPublic';
 import useAuth from '../../../Hooks/useAuth';
+import Swal from 'sweetalert2';
 
 const Home2 = () => {
     const axiosPublic = useAxiosPublic()
-    const {user}=useAuth();
-    console.log("hendle",user);
-    const [users, setUsers] = useState([]);
+    const { user } = useAuth();
+    const [userss, setUserss] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [filters, setFilters] = useState({
         domain: [],
@@ -29,7 +29,7 @@ const Home2 = () => {
                         page: currentPage
                     }
                 });
-                setUsers(response.data.users);
+                setUserss(response.data.users);
                 setTotalPages(response.data.totalPages);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -62,24 +62,35 @@ const Home2 = () => {
     };
 
     // handle add to card 
-    const handleAddToTeam = async (user) => {
-        console.log(user);
+    const handleAddToTeam = async (getUser) => {
         try {
-            // Add more extra information to the user object
+            const { _id, ...getUserWithoutId } = getUser;
             const userWithExtraInfo = {
-                ...user,authorEmail:user.email               
+                ...getUserWithoutId,
+                authorEmail: user.email,
                 // Add more extra information as needed
             };
-    
+
             // Send POST request to backend API endpoint
             const response = await axiosPublic.post('/add-to-team', userWithExtraInfo);
-            console.log(response.data); // Log the response from the backend (optional)
+            console.log(response.data);
+            if (response.data.insertedId) {
+                // show success popup 
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: `Member added Successfully`,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
             // Optionally, you can update the UI or show a success message to the user
         } catch (error) {
             console.error('Error adding to team:', error);
             // Optionally, you can show an error message to the user
         }
     };
+
     return (
         <div className="flex ">
             {/* Left side */}
@@ -119,29 +130,29 @@ const Home2 = () => {
             <div className="w-3/4 p-4">
                 <h2 className="text-lg font-semibold mb-2">All User</h2>
                 <div className="grid grid-cols-3 gap-4 ">
-                    {users?.map(user => (
-                        <div key={user?._id} className="max-w-[300px] md:w-[350px] bg-white  p-2 md:p-1 shadow-md rounded-2xl space-y-8">
+                    {userss?.map(getUser => (
+                        <div key={getUser?._id} className="max-w-[300px] md:w-[350px] bg-white  p-2 md:p-1 shadow-md rounded-2xl space-y-8">
                             {/* profile image & bg  */}
                             <div className="relative">
                                 <img className="w-full h-full rounded-2xl bg-gray-500" src="https://source.unsplash.com/350x150/?northern lights" alt="card navigate ui" />
-                                <img className="w-[100px] h-[100px] absolute -bottom-10 left-1/2 -translate-x-1/2 rounded-full bg-gray-400 border border-white" src={user?.avatar} alt="card navigate ui" />
+                                <img className="w-[100px] h-[100px] absolute -bottom-10 left-1/2 -translate-x-1/2 rounded-full bg-gray-400 border border-white" src={getUser?.avatar} alt="card navigate ui" />
                             </div>
                             {/* profile name & role */}
                             <div className="pt-1 text-center space-y-1">
-                                <h1 className="text-xl md:text-2xl">Name: {user?.first_name}</h1>
-                                <p className="text-gray-400 text-sm">Name: {user?.first_name}</p>
-                                <p className="text-gray-400 text-sm">Email: {user.email}</p>
-                                <p className="text-gray-400 text-sm">Domain: {user.domain}</p>
-                                <p className="text-gray-400 text-sm">Gender: {user.gender}</p>
-                                <p className="text-gray-400 text-sm">Availability: {user.available ? 'Available' : 'Busy'}</p>
+                                <h1 className="text-xl md:text-2xl">Name: {getUser?.first_name}</h1>
+                                <p className="text-gray-400 text-sm">Name: {getUser?.first_name}</p>
+                                <p className="text-gray-400 text-sm">Email: {getUser.email}</p>
+                                <p className="text-gray-400 text-sm">Domain: {getUser.domain}</p>
+                                <p className="text-gray-400 text-sm">Gender: {getUser.gender}</p>
+                                <p className="text-gray-400 text-sm">Availability: {getUser.available ? 'Available' : 'Busy'}</p>
                             </div>
                             {/* post , followers following  */}
                             <div className="text-center ">
 
-                                <button onClick={() => handleAddToTeam(user)} className="hover:bg-[#0095FF] hover:scale-95 font-medium hover:text-white w-[50%] py-2 rounded-full hover:shadow-xl   text-gray-400 shadow-[0px_0px_10px_#E2DADA] t duration-500">
+                                <button onClick={() => handleAddToTeam(getUser)} className="hover:bg-[#0095FF] hover:scale-95 font-medium hover:text-white w-[50%] py-2 rounded-full hover:shadow-xl   text-gray-400 shadow-[0px_0px_10px_#E2DADA] t duration-500">
                                     Add to Team
                                 </button>
-                                
+
                             </div>
                         </div>
                     ))}
