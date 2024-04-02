@@ -1,9 +1,12 @@
 
 import { useEffect, useState } from 'react';
 import useAxiosPublic from '../../../Hooks/useAxiosPublic';
+import useAuth from '../../../Hooks/useAuth';
 
 const Home2 = () => {
     const axiosPublic = useAxiosPublic()
+    const {user}=useAuth();
+    console.log("hendle",user);
     const [users, setUsers] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [filters, setFilters] = useState({
@@ -56,6 +59,26 @@ const Home2 = () => {
 
     const handleNextPage = () => {
         setCurrentPage(prevPage => Math.min(prevPage + 1, totalPages));
+    };
+
+    // handle add to card 
+    const handleAddToTeam = async (user) => {
+        console.log(user);
+        try {
+            // Add more extra information to the user object
+            const userWithExtraInfo = {
+                ...user,authorEmail:user.email               
+                // Add more extra information as needed
+            };
+    
+            // Send POST request to backend API endpoint
+            const response = await axiosPublic.post('/add-to-team', userWithExtraInfo);
+            console.log(response.data); // Log the response from the backend (optional)
+            // Optionally, you can update the UI or show a success message to the user
+        } catch (error) {
+            console.error('Error adding to team:', error);
+            // Optionally, you can show an error message to the user
+        }
     };
     return (
         <div className="flex ">
@@ -115,9 +138,10 @@ const Home2 = () => {
                             {/* post , followers following  */}
                             <div className="text-center ">
 
-                                <button className="hover:bg-[#0095FF] hover:scale-95 font-medium hover:text-white w-[50%] py-2 rounded-full hover:shadow-xl   text-gray-400 shadow-[0px_0px_10px_#E2DADA] t duration-500">
+                                <button onClick={() => handleAddToTeam(user)} className="hover:bg-[#0095FF] hover:scale-95 font-medium hover:text-white w-[50%] py-2 rounded-full hover:shadow-xl   text-gray-400 shadow-[0px_0px_10px_#E2DADA] t duration-500">
                                     Add to Team
                                 </button>
+                                
                             </div>
                         </div>
                     ))}
