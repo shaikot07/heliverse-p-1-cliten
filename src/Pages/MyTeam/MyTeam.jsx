@@ -39,7 +39,7 @@ const MyTeam = () => {
         });
     }
     return (
-        <div className="w-3/4 p-4 mx-auto">
+        <div className="w-3/4 p-4 mx-auto text-white">
             <h3 className="text-3xl font-semibold py-3">My Team Member</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 ">
                 {teamData.length === 0 ? (

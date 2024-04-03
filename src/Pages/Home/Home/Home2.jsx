@@ -10,6 +10,7 @@ const Home2 = () => {
     const { user } = useAuth();
     const [userss, setUserss] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    console.log(searchTerm);
     const [filters, setFilters] = useState({
         domain: [],
         gender: [],
@@ -93,15 +94,37 @@ const Home2 = () => {
     };
 
     return (
-        <div className=" md:flex w-full">
+        <div className=" md:flex w-full overflow-hidden">
             {/* Left side */}
             <div className="w-full md:w-1/4 bg-[#40346A] md:h-[500px] xl:h-screen p-4 ">
-                <h2 className="text-lg font-semibold mb-2">Search and Filters</h2>
-                {/* <input type="text" placeholder="Search by name" value={searchTerm} onChange={handleSearch} className="border border-gray-300 rounded px-3 py-2 mb-2 w-full" /> */}
-                <label className="input input-bordered flex items-center gap-2 bg-slate-500">
-                    <input type="text" className="grow" placeholder="Search" value={searchTerm} onChange={handleSearch} />
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70"><path fillRule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clipRule="evenodd" /></svg>
-                </label>
+                <h2 className="text-lg font-semibold mb-2 text-white">Search and Filters</h2>
+                <div>
+                    <label className="input input-bordered flex items-center gap-2 bg-slate-500">
+                        {/* Input field for search term */}
+                        <input
+                            type="text"
+                            className="grow"
+                            placeholder="Search"
+                            value={searchTerm}
+                            onChange={handleSearch} // Keep the onChange handler for user input
+                        />
+
+                        {/* Search icon with onClick handler */}
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 16 16"
+                            fill="currentColor"
+                            className="w-4 h-4 opacity-70 cursor-pointer"
+                            onClick={handleSearch} // Trigger search on click
+                        >
+                            <path
+                                fillRule="evenodd"
+                                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                                clipRule="evenodd"
+                            />
+                        </svg>
+                    </label>
+                </div>
                 <div className='mt-6'>
                     <h2 className='font-semibold'>Filter By Domain</h2>
                     <select onChange={(event) => handleFilterChange(event, 'domain')} className="select select-primary w-full max-w-xs bg-slate-500">
@@ -129,7 +152,7 @@ const Home2 = () => {
 
             {/* Right side */}
             <div className="w-3/4 p-4 mx-auto">
-                <h2 className="text-lg font-semibold mb-2">All User</h2>
+                <h2 className="text-lg font-semibold mb-2 text-white">All User</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 ">
                     {userss?.map(getUser => (
                         <div key={getUser?._id} className="max-w-[300px] md:w-[350px] bg-white  p-2 md:p-1 shadow-md rounded-2xl space-y-8">
@@ -163,7 +186,7 @@ const Home2 = () => {
                     <span>Page {currentPage} of {totalPages}</span>
                     <button onClick={handleNextPage} disabled={currentPage === totalPages} className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300 disabled:cursor-not-allowed">Next</button>
                 </div> */}
-                <div className="mt-4 flex justify-between w-[518px] bg-red-600">
+                <div className="mt-4 flex justify-between w-[518px]">
                     <nav aria-label="Page navigation example ">
                         <ul className="flex items-center -space-x-px text-sm sm:text-base">
                             <li>
