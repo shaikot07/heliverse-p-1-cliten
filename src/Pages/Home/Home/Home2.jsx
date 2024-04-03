@@ -93,9 +93,9 @@ const Home2 = () => {
     };
 
     return (
-        <div className="flex ">
+        <div className=" md:flex w-full">
             {/* Left side */}
-            <div className="w-1/4 bg-[#40346A] h-screen p-4">
+            <div className="w-full md:w-1/4 bg-[#40346A] md:h-[500px] xl:h-screen p-4 ">
                 <h2 className="text-lg font-semibold mb-2">Search and Filters</h2>
                 {/* <input type="text" placeholder="Search by name" value={searchTerm} onChange={handleSearch} className="border border-gray-300 rounded px-3 py-2 mb-2 w-full" /> */}
                 <label className="input input-bordered flex items-center gap-2 bg-slate-500">
@@ -128,9 +128,9 @@ const Home2 = () => {
             </div>
 
             {/* Right side */}
-            <div className="w-3/4 p-4">
+            <div className="w-3/4 p-4 mx-auto">
                 <h2 className="text-lg font-semibold mb-2">All User</h2>
-                <div className="grid grid-cols-3 gap-4 ">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 ">
                     {userss?.map(getUser => (
                         <div key={getUser?._id} className="max-w-[300px] md:w-[350px] bg-white  p-2 md:p-1 shadow-md rounded-2xl space-y-8">
                             {/* profile image & bg  */}
@@ -163,13 +163,13 @@ const Home2 = () => {
                     <span>Page {currentPage} of {totalPages}</span>
                     <button onClick={handleNextPage} disabled={currentPage === totalPages} className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300 disabled:cursor-not-allowed">Next</button>
                 </div> */}
-                <div className="mt-4 flex justify-between">
-                    <nav aria-label="Page navigation example">
-                        <ul className="flex items-center -space-x-px h-10 text-base">
+                <div className="mt-4 flex justify-between w-[518px] bg-red-600">
+                    <nav aria-label="Page navigation example ">
+                        <ul className="flex items-center -space-x-px text-sm sm:text-base">
                             <li>
-                                <button onClick={handlePrevPage} disabled={currentPage === 1} className="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                <button onClick={handlePrevPage} disabled={currentPage === 1} className="flex items-center justify-center px-3 sm:px-4 h-8 sm:h-10 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                                     <span className="sr-only">Previous</span>
-                                    <svg className="w-3 h-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                    <svg className="w-2 h-2 sm:w-3 sm:h-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 1 1 5l4 4" />
                                     </svg>
                                 </button>
@@ -179,16 +179,16 @@ const Home2 = () => {
                                 const pageNumber = currentPage > 5 ? currentPage - 5 + index : index + 1;
                                 return (
                                     <li key={index}>
-                                        <button onClick={() => setCurrentPage(pageNumber)} className={`flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white ${currentPage === pageNumber ? 'border-blue-300 bg-blue-50 text-blue-600 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white' : ''}`}>
+                                        <button onClick={() => setCurrentPage(pageNumber)} className={`flex items-center justify-center px-3 sm:px-4 h-8 sm:h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white ${currentPage === pageNumber ? 'border-blue-300 bg-blue-50 text-blue-600 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white' : ''}`}>
                                             {pageNumber}
                                         </button>
                                     </li>
                                 );
                             })}
                             <li>
-                                <button onClick={handleNextPage} disabled={currentPage === totalPages} className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                <button onClick={handleNextPage} disabled={currentPage === totalPages} className="flex items-center justify-center px-3 sm:px-4 h-8 sm:h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                                     <span className="sr-only">Next</span>
-                                    <svg className="w-3 h-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                    <svg className="w-2 h-2 sm:w-3 sm:h-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
                                     </svg>
                                 </button>
@@ -196,6 +196,7 @@ const Home2 = () => {
                         </ul>
                     </nav>
                 </div>
+
 
             </div>
         </div>
