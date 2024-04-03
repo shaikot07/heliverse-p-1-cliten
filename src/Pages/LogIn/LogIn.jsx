@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import signinLottie from "/public/assets/lottieAnimation/signin-lottie.json";
 import signinLoadingLottie from "/public/assets/lottieAnimation/registration_loading";
 import useAuth from '../../Hooks/useAuth';
-import { FaEye, FaEyeSlash, FaGoogle } from 'react-icons/fa';
+import { FaEye, FaEyeSlash,  } from 'react-icons/fa';
 import Lottie from 'lottie-react';
 import SocialLogin from '../../assets/component/SocalLogIn/SocalLogIn';
 
@@ -15,7 +15,7 @@ const LogIn = () => {
       const [isShowPass, setIsShowPass] = useState(false);
       const [success, setSuccess] = useState("");
       const [error, setError] = useState("");
-      const { user, setUser, loading, setLoading, createUser, signIn, logOut, updatedUserProfile, googleSignIn } = useAuth()
+      const { user, setUser, loading, setLoading, signIn, } = useAuth()
 
       useEffect(() => {
             if (user) {
@@ -26,7 +26,7 @@ const LogIn = () => {
       const {
             register,
             handleSubmit,
-            watch,
+            // watch,
             reset,
             formState: { errors },
       } = useForm();
@@ -167,10 +167,10 @@ const LogIn = () => {
                                     <p className="text-sm font-light text-slate-300">
                                           New user?{" "}
                                           <Link
-                                                to="/signup"
+                                                to="/register"
                                                 className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                                           >
-                                                Signup
+                                               Register
                                           </Link>
                                     </p>
                               </form>

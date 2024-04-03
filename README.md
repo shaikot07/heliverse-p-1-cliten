@@ -1,8 +1,10 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+project Setup Guideline
 
-Currently, two official plugins are available:
+1. clone this project
+2. open the project in your Machine
+3. create  (.env.local) file in root
+4. past here firebase auth Credential and imgbb hosting API......for image Hosting
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+--project live link: https://heliverse-job-task-project-1.netlify.app/

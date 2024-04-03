@@ -5,6 +5,7 @@ import RegistrationPage from "../Pages/RegistrationPage/RegistrationPage";
 import Home2 from "../Pages/Home/Home/Home2";
 import MyTeam from "../Pages/MyTeam/MyTeam";
 import ErrorPage from "../assets/component/ErrorPage";
+import PrivateRoute from "./PrivateRoute";
 
 
 
@@ -21,7 +22,7 @@ export  const router = createBrowserRouter([
         },
         {
             path:'my-task',
-            element:<MyTeam></MyTeam>
+            element:<PrivateRoute><MyTeam></MyTeam></PrivateRoute>
         },
         {
             path:'login',

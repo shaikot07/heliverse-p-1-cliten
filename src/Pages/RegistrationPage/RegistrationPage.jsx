@@ -16,7 +16,7 @@ const imageHostingApi = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`
 console.log('this is img hosting key',imageHostingKey, imageHostingApi);
 const RegistrationPage = () => {
     const navigate = useNavigate()
-    const { user,loading,setLoading,createUser,signIn,logOut,updatedUserProfile, googleSignIn } = useAuth()
+    const { user,loading,setLoading,createUser,updatedUserProfile,  } = useAuth()
 
     const [isShowPass, setIsShowPass] = useState(false);
     const [isConfirmShowPass, setIsConfirmShowPass] = useState(false);
@@ -31,12 +31,12 @@ const RegistrationPage = () => {
         }
     }, [user]);
 
-    const { register, handleSubmit,watch,formState: { errors },} = useForm();
+    const { register, handleSubmit,formState: { errors },} = useForm();
 
     // signup func
     const handleSignupFunc = (form) => {
         setLoading(true);
-        const { name, photo, email, password, confirmPassword, terms, bio } =form;
+        const { name, photo, email, password, confirmPassword, terms,  } =form;
         const formData = new FormData();
         formData.append("image", photo[0]);
         // console.log( name, photo, email, password,);
@@ -269,7 +269,7 @@ const RegistrationPage = () => {
                     <p className="text-sm font-light text-slate-300">
                         Already have an account?{" "}
                         <Link
-                            to="/signin"
+                            to="/login"
                             className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                         >
                             Sign in

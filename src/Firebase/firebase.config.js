@@ -5,13 +5,14 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDPfeXoEieA9UKukjvHJvfei-wvPEMRZug",
-  authDomain: "heliverse-p-1-client.firebaseapp.com",
-  projectId: "heliverse-p-1-client",
-  storageBucket: "heliverse-p-1-client.appspot.com",
-  messagingSenderId: "807671509668",
-  appId: "1:807671509668:web:e90cf58be9912fff64ac31"
+  apiKey:import.meta.env.VITE_apiKey,
+  authDomain:import.meta.env.VITE_authDomain,
+  projectId:import.meta.env.VITE_projectId,
+  storageBucket:import.meta.env.VITE_storageBucket,
+  messagingSenderId:import.meta.env.VITE_messagingSenderId,
+  appId:import.meta.env.VITE_appId,
 };
+
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
