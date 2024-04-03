@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import useAxiosPublic from '../../../Hooks/useAxiosPublic';
 import useAuth from '../../../Hooks/useAuth';
 import Swal from 'sweetalert2';
+import MyLoading from '../../../assets/component/MyLoading';
 
 const Home2 = () => {
     const axiosPublic = useAxiosPublic()
@@ -154,32 +155,37 @@ const Home2 = () => {
             <div className="w-3/4 p-4 mx-auto">
                 <h2 className="text-lg font-semibold mb-2 text-white">All User</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 ">
-                    {userss?.map(getUser => (
-                        <div key={getUser?._id} className="max-w-[300px] md:w-[350px] bg-white  p-2 md:p-1 shadow-md rounded-2xl space-y-8">
-                            {/* profile image & bg  */}
-                            <div className="relative">
-                                <img className="w-full h-full rounded-2xl bg-gray-500" src="https://source.unsplash.com/350x150/?northern lights" alt="card navigate ui" />
-                                <img className="w-[100px] h-[100px] absolute -bottom-10 left-1/2 -translate-x-1/2 rounded-full bg-gray-400 border border-white" src={getUser?.avatar} alt="card navigate ui" />
-                            </div>
-                            {/* profile name & role */}
-                            <div className="pt-1 text-center space-y-1">
-                                <h1 className="text-xl md:text-2xl">Name: {getUser?.first_name}</h1>
-                                <p className="text-gray-400 text-sm">Name: {getUser?.first_name}</p>
-                                <p className="text-gray-400 text-sm">Email: {getUser.email}</p>
-                                <p className="text-gray-400 text-sm">Domain: {getUser.domain}</p>
-                                <p className="text-gray-400 text-sm">Gender: {getUser.gender}</p>
-                                <p className="text-gray-400 text-sm">Availability: {getUser.available ? 'Available' : 'Busy'}</p>
-                            </div>
-                            {/* post , followers following  */}
-                            <div className="text-center ">
-
-                                <button onClick={() => handleAddToTeam(getUser)} className="hover:bg-[#0095FF] hover:scale-95 font-medium hover:text-white w-[50%] py-2 rounded-full hover:shadow-xl   text-gray-400 shadow-[0px_0px_10px_#E2DADA] t duration-500">
-                                    Add to Team
-                                </button>
-
-                            </div>
+                    {userss?.length === 0 ? (
+                        <div className='w-[500px] h-[200px] mx-auto' >
+                            <MyLoading></MyLoading>
                         </div>
-                    ))}
+                    ) : (
+                        userss.map(getUser => (
+                            <div key={getUser?._id} className="max-w-[300px] md:w-[350px] bg-white  p-2 md:p-1 shadow-md rounded-2xl space-y-8">
+                                {/* profile image & bg  */}
+                                <div className="relative">
+                                    <img className="w-full h-full rounded-2xl bg-gray-500" src="https://source.unsplash.com/350x150/?northern lights" alt="card navigate ui" />
+                                    <img className="w-[100px] h-[100px] absolute -bottom-10 left-1/2 -translate-x-1/2 rounded-full bg-gray-400 border border-white" src={getUser?.avatar} alt="card navigate ui" />
+                                </div>
+                                {/* profile name & role */}
+                                <div className="pt-1 text-center space-y-1">
+                                    <h1 className="text-xl md:text-2xl">Name: {getUser?.first_name}</h1>
+                                    <p className="text-gray-400 text-sm">Name: {getUser?.first_name}</p>
+                                    <p className="text-gray-400 text-sm">Email: {getUser.email}</p>
+                                    <p className="text-gray-400 text-sm">Domain: {getUser.domain}</p>
+                                    <p className="text-gray-400 text-sm">Gender: {getUser.gender}</p>
+                                    <p className="text-gray-400 text-sm">Availability: {getUser.available ? 'Available' : 'Busy'}</p>
+                                </div>
+                                {/* post , followers following  */}
+                                <div className="text-center ">
+                                    <button onClick={() => handleAddToTeam(getUser)} className="hover:bg-[#0095FF] hover:scale-95 font-medium hover:text-white w-[50%] py-2 rounded-full hover:shadow-xl   text-gray-400 shadow-[0px_0px_10px_#E2DADA] t duration-500">
+                                        Add to Team
+                                    </button>
+                                </div>
+                            </div>
+                        ))
+                    )}
+
                 </div>
                 {/* <div className="mt-4 flex justify-between">
                     <button onClick={handlePrevPage} disabled={currentPage === 1} className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300 disabled:cursor-not-allowed">Previous</button>
